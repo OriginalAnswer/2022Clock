@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2&display=swap" rel="stylesheet">
+    <title>Clock 2022</title>
+    <style>
+        *{
+            padding: 0;margin: 0;
+            box-sizing: border-box;
+        }
+        :root{
+            --clr-needle:#000;
+            --clr-bg:rgb(239, 247, 255);
+            --clr-op0: rgba(0,0,0,0);
+            --clr-clockbg:rgb(239, 247, 255);
+        }
+        html,body{
+            width: 100%; height: 100%;
+            /* overflow: hidden; */
+            font-family: 'Baloo 2', sans-serif;
+        }
+        body,
+        .clock,
+        .s-n,
+        .s-bar{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .clock{
+            position: relative;
+            width: 500px;height: 500px;
+            background-color: rgb(239, 247, 255);
+            border-radius: 50%;
+        }
+        .s-n,
+        .s-n div,
+        .s-bar,
+        .s-bar div,
+        .s-time{
+            width: 100%;height: 100%;
+        }
+        .s-n,
+        .s-bar,
+        .s-time{
+            position: absolute;
+        }
+        .s-n>div,
+        .s-bar>div{
+            display: flex;align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            background-color: var(--clr-op0);
+        }
+        .s-n>div>div,
+        .s-bar>div>div{
+            background-color: #000;
+            border-radius: 0 0 50px 50px ;
+        }
+        .s-n span{font-size: 2em; font-weight: 800;}
+        .s-n>div>div{width: 0.15em;height: 20px;}
+        .s-bar>div>div{width: 0.05em;height: 8px;}
+
+        .s-n>div:nth-child(1){transform: rotate(30deg);}
+        .s-n>div:nth-child(2){transform: rotate(60deg);}
+        .s-n>div:nth-child(3){transform: rotate(90deg);}
+        .s-n>div:nth-child(4){transform: rotate(120deg);}
+        .s-n>div:nth-child(5){transform: rotate(150deg);}
+        .s-n>div:nth-child(6){transform: rotate(180deg);}
+        .s-n>div:nth-child(7){transform: rotate(210deg);}
+        .s-n>div:nth-child(8){transform: rotate(240deg);}
+        .s-n>div:nth-child(9){transform: rotate(270deg);}
+        .s-n>div:nth-child(10){transform: rotate(300deg);}
+        .s-n>div:nth-child(11){transform: rotate(330deg);}
+        .s-n>div:nth-child(12){transform: rotate(360deg);}
+        
+
+        .s-bar>div:nth-child(1){transform: rotate(10deg);}
+        .s-bar>div:nth-child(2){transform: rotate(20deg);}
+        .s-bar>div:nth-child(3){transform: rotate(40deg);}
+        .s-bar>div:nth-child(4){transform: rotate(50deg);}
+        .s-bar>div:nth-child(5){transform: rotate(70deg);}
+        .s-bar>div:nth-child(6){transform: rotate(80deg);}
+        .s-bar>div:nth-child(7){transform: rotate(100deg);}
+        .s-bar>div:nth-child(8){transform: rotate(110deg);}
+        .s-bar>div:nth-child(9){transform: rotate(130deg);}
+        .s-bar>div:nth-child(10){transform: rotate(140deg);}
+        .s-bar>div:nth-child(11){transform: rotate(160deg);}
+        .s-bar>div:nth-child(12){transform: rotate(170deg);}
+        .s-bar>div:nth-child(13){transform: rotate(190deg);}
+        .s-bar>div:nth-child(14){transform: rotate(200deg);}
+        .s-bar>div:nth-child(15){transform: rotate(220deg);}
+        .s-bar>div:nth-child(16){transform: rotate(230deg);}
+        .s-bar>div:nth-child(17){transform: rotate(250deg);}
+        .s-bar>div:nth-child(18){transform: rotate(260deg);}
+        .s-bar>div:nth-child(19){transform: rotate(280deg);}
+        .s-bar>div:nth-child(20){transform: rotate(290deg);}
+        .s-bar>div:nth-child(21){transform: rotate(310deg);}
+        .s-bar>div:nth-child(22){transform: rotate(320deg);}
+        .s-bar>div:nth-child(23){transform: rotate(340deg);}
+        .s-bar>div:nth-child(24){transform: rotate(350deg);}
+
+        .s-time{
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(104, 86, 122, 0.186);}
+        .s-time>div{
+            position: relative;
+        }
+        .s-time>div>div{
+            background-color: var(--clr-needle);
+            position: absolute;
+            transform: rotateY(180deg);
+        }
+        .s-time #h{width: 10px; height: 220px;}
+        .s-time #m{width: 5px;height: 200px;}
+        .s-time #s{width: 1px;height: 240px;background-color: rgb(245, 0, 0);}
+        
+    </style>
+</head>
+<body>
+    <main class="clock">
+        <section class="s-n">
+            <div class="n1"><div></div> <span>1</span></div>
+            <div class="n2"><div></div> <span>2</span></div>
+            <div class="n3"><div></div> <span>3</span></div>
+            <div class="n4"><div></div> <span>4</span></div>
+            <div class="n5"><div></div> <span>5</span></div>
+            <div class="n6"><div></div> <span>6</span></div>
+            <div class="n7"><div></div> <span>7</span></div>
+            <div class="n8"><div></div> <span>8</span></div>
+            <div class="n9"><div></div> <span>9</span></div>
+            <div class="n10"><div></div><span>10</span></div>
+            <div class="n11"><div></div><span>11</span></div>
+            <div class="n12"><div></div><span>12</span></div>
+        </section>
+        <section class="s-bar">
+            <div class="b1-1"><div></div></div>
+            <div class="b1-2"><div></div></div>
+            <div class="b2-1"><div></div></div>
+            <div class="b2-2"><div></div></div>
+            <div class="b3-1"><div></div></div>
+            <div class="b3-2"><div></div></div>
+            <div class="b4-1"><div></div></div>
+            <div class="b4-2"><div></div></div>
+            <div class="b5-1"><div></div></div>
+            <div class="b5-2"><div></div></div>
+            <div class="b6-1"><div></div></div>
+            <div class="b6-2"><div></div></div>
+            <div class="b7-1"><div></div></div>
+            <div class="b7-2"><div></div></div>
+            <div class="b8-1"><div></div></div>
+            <div class="b8-2"><div></div></div>
+            <div class="b9-1"><div></div></div>
+            <div class="b9-2"><div></div></div>
+            <div class="b10-1"><div></div></div>
+            <div class="b10-2"><div></div></div>
+            <div class="b11-1"><div></div></div>
+            <div class="b11-2"><div></div></div>
+            <div class="b12-1"><div></div></div>
+            <div class="b12-2"><div></div></div>
+        </section>
+        <section class="s-time">
+            <div class="h"><div id="h"></div></div>
+            <div class="m"><div id="m"></div></div>
+            <div class="s"><div id="s"></div></div>
+        </section>
+    </main>
+</body>
+</html>
