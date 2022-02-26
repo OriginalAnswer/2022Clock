@@ -12,15 +12,19 @@
             box-sizing: border-box;
         }
         :root{
-            --clr-needle:#000;
-            --clr-bg:rgb(239, 247, 255);
+            --scale:0.93;
+            --time-center-size: 30px;
+            --clr-bg:#a3a3a3;
             --clr-op0: rgba(0,0,0,0);
-            --clr-clockbg:rgb(239, 247, 255);
+            --clr-needle:rgb(0, 0, 0);
         }
         html,body{
             width: 100%; height: 100%;
             /* overflow: hidden; */
             font-family: 'Baloo 2', sans-serif;
+        }
+        body{
+            background-color: var(--clr-bg);
         }
         body,
         .clock,
@@ -31,16 +35,31 @@
             align-items: center;
         }
         .clock{
+            transform: scale(0.8);
             position: relative;
             width: 500px;height: 500px;
-            background-color: rgb(239, 247, 255);
             border-radius: 50%;
+            /* background: linear-gradient(145deg,#eeeeee,#c8c8c8); */
+            border: var(--clr-bg) solid 10px;
+            box-shadow:  0 -15px 15px rgba(255,255,255,0.05),
+            inset 0 -15px 15px rgba(255,255,255,0.05),
+            0 15px 15px rgba(0,0,0,0.05),
+            inset 0 15px 15px rgba(0,0,0,0.05);
         }
         .s-n,
         .s-n div,
         .s-bar,
         .s-bar div,
-        .s-time{
+        .s-time::after{
+            transform: scale(var(--scale));
+        }
+        .s-n,
+        .s-n div,
+        .s-bar,
+        .s-bar div,
+        .s-time,
+        .s-time::after
+        {
             width: 100%;height: 100%;
         }
         .s-n,
@@ -61,116 +80,104 @@
             background-color: #000;
             border-radius: 0 0 50px 50px ;
         }
-        .s-n span{font-size: 2em; font-weight: 800;}
+        .s-n span{font-size: 2em; font-weight: 800;transform: rotate(-90deg);}
         .s-n>div>div{width: 0.15em;height: 20px;}
         .s-bar>div>div{width: 0.05em;height: 8px;}
-
-        .s-n>div:nth-child(1){transform: rotate(30deg);}
-        .s-n>div:nth-child(2){transform: rotate(60deg);}
-        .s-n>div:nth-child(3){transform: rotate(90deg);}
-        .s-n>div:nth-child(4){transform: rotate(120deg);}
-        .s-n>div:nth-child(5){transform: rotate(150deg);}
-        .s-n>div:nth-child(6){transform: rotate(180deg);}
-        .s-n>div:nth-child(7){transform: rotate(210deg);}
-        .s-n>div:nth-child(8){transform: rotate(240deg);}
-        .s-n>div:nth-child(9){transform: rotate(270deg);}
-        .s-n>div:nth-child(10){transform: rotate(300deg);}
-        .s-n>div:nth-child(11){transform: rotate(330deg);}
-        .s-n>div:nth-child(12){transform: rotate(360deg);}
-        
-
-        .s-bar>div:nth-child(1){transform: rotate(10deg);}
-        .s-bar>div:nth-child(2){transform: rotate(20deg);}
-        .s-bar>div:nth-child(3){transform: rotate(40deg);}
-        .s-bar>div:nth-child(4){transform: rotate(50deg);}
-        .s-bar>div:nth-child(5){transform: rotate(70deg);}
-        .s-bar>div:nth-child(6){transform: rotate(80deg);}
-        .s-bar>div:nth-child(7){transform: rotate(100deg);}
-        .s-bar>div:nth-child(8){transform: rotate(110deg);}
-        .s-bar>div:nth-child(9){transform: rotate(130deg);}
-        .s-bar>div:nth-child(10){transform: rotate(140deg);}
-        .s-bar>div:nth-child(11){transform: rotate(160deg);}
-        .s-bar>div:nth-child(12){transform: rotate(170deg);}
-        .s-bar>div:nth-child(13){transform: rotate(190deg);}
-        .s-bar>div:nth-child(14){transform: rotate(200deg);}
-        .s-bar>div:nth-child(15){transform: rotate(220deg);}
-        .s-bar>div:nth-child(16){transform: rotate(230deg);}
-        .s-bar>div:nth-child(17){transform: rotate(250deg);}
-        .s-bar>div:nth-child(18){transform: rotate(260deg);}
-        .s-bar>div:nth-child(19){transform: rotate(280deg);}
-        .s-bar>div:nth-child(20){transform: rotate(290deg);}
-        .s-bar>div:nth-child(21){transform: rotate(310deg);}
-        .s-bar>div:nth-child(22){transform: rotate(320deg);}
-        .s-bar>div:nth-child(23){transform: rotate(340deg);}
-        .s-bar>div:nth-child(24){transform: rotate(350deg);}
-
         .s-time{
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(104, 86, 122, 0.186);}
+            transform: rotate(180deg) scale(var(--scale));
+        }
+        .s-time::after{
+            content: "";
+            position: absolute;
+            width:var(--time-center-size);height: var(--time-center-size);
+            border-radius: 71px;
+            background: linear-gradient(145deg, #c0c0c0, #807f7f);
+            box-shadow:  3px 3px 5px #6e6e6e,
+                        -3px -3px 5px #969696;
+        }
         .s-time>div{
             position: relative;
         }
         .s-time>div>div{
             background-color: var(--clr-needle);
             position: absolute;
-            transform: rotateY(180deg);
+            transform: translateX(-50%);
         }
-        .s-time #h{width: 10px; height: 220px;}
-        .s-time #m{width: 5px;height: 200px;}
-        .s-time #s{width: 1px;height: 240px;background-color: rgb(245, 0, 0);}
+        .s-time .h{transform: rotate();}
+        .s-time .m{transform: rotate();}
+        .s-time .s{transform: rotate();}
+        .s-time #h-bar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: column-reverse;
+            background-color: var(--clr-op0);
+            border-radius: 10px 10px 50px 50px;
+            width: 60px; height: 225px;}
+        .s-time #h-bar>.s1{
+            border-radius: 50%;
+            border: var(--clr-needle) 3px solid;
+            width:60px; height:60px;
+        }
+        .s-time #h-bar>.s2{
+            background-color: var(--clr-needle);
+            width: 2px;height:175px;
+        }
+        .s-time #m-bar{width: 1px;height: 230px;}
+        .s-time #s-bar{width: 1px;height: 240px;background-color: rgb(245, 0, 0);}
         
     </style>
 </head>
 <body>
     <main class="clock">
-        <section class="s-n">
-            <div class="n1"><div></div> <span>1</span></div>
-            <div class="n2"><div></div> <span>2</span></div>
-            <div class="n3"><div></div> <span>3</span></div>
-            <div class="n4"><div></div> <span>4</span></div>
-            <div class="n5"><div></div> <span>5</span></div>
-            <div class="n6"><div></div> <span>6</span></div>
-            <div class="n7"><div></div> <span>7</span></div>
-            <div class="n8"><div></div> <span>8</span></div>
-            <div class="n9"><div></div> <span>9</span></div>
-            <div class="n10"><div></div><span>10</span></div>
-            <div class="n11"><div></div><span>11</span></div>
-            <div class="n12"><div></div><span>12</span></div>
+        <section class="s-n" id="s-n">
         </section>
-        <section class="s-bar">
-            <div class="b1-1"><div></div></div>
-            <div class="b1-2"><div></div></div>
-            <div class="b2-1"><div></div></div>
-            <div class="b2-2"><div></div></div>
-            <div class="b3-1"><div></div></div>
-            <div class="b3-2"><div></div></div>
-            <div class="b4-1"><div></div></div>
-            <div class="b4-2"><div></div></div>
-            <div class="b5-1"><div></div></div>
-            <div class="b5-2"><div></div></div>
-            <div class="b6-1"><div></div></div>
-            <div class="b6-2"><div></div></div>
-            <div class="b7-1"><div></div></div>
-            <div class="b7-2"><div></div></div>
-            <div class="b8-1"><div></div></div>
-            <div class="b8-2"><div></div></div>
-            <div class="b9-1"><div></div></div>
-            <div class="b9-2"><div></div></div>
-            <div class="b10-1"><div></div></div>
-            <div class="b10-2"><div></div></div>
-            <div class="b11-1"><div></div></div>
-            <div class="b11-2"><div></div></div>
-            <div class="b12-1"><div></div></div>
-            <div class="b12-2"><div></div></div>
+        <section class="s-bar" id="s-bar">
         </section>
         <section class="s-time">
-            <div class="h"><div id="h"></div></div>
-            <div class="m"><div id="m"></div></div>
-            <div class="s"><div id="s"></div></div>
+            <div class="h" id="h"><div id="h-bar"><div class="s1"></div><div class="s2"></div></div></div>
+            <div class="m" id="m"><div id="m-bar"></div></div>
+            <div class="s" id="s"><div id="s-bar"></div></div>
         </section>
     </main>
+
+    <script type="text/javascript">
+        const sbs = document.getElementById('s-bar');
+        const sn = document.getElementById('s-n');
+
+        for (let i = 0; i < 72; i++) {
+            sbs.innerHTML += 
+            `<div style="transform: rotate(${5*i}deg);">
+                <div></div>
+            </div>`;
+        }
+        for (let i = 1; i < 13; i++) {
+            sn.innerHTML += 
+            `<div style="transform: rotate(${30*i}deg);">
+                <div></div>
+                <span style="transform: rotate(${-30*i}deg);">${i}</span>
+            </div>`;
+        }
+
+
+        const h = document.getElementById('h');
+        const m = document.getElementById('m');
+        const s = document.getElementById('s');
+        function getTime(){
+            const date = new Date();
+            const gh = String(date.getHours());
+            const gm = String(date.getMinutes());
+            const gs = date.getSeconds();
+            s.style.transform = `rotate(${gs*6}deg)`;
+            m.style.transform = `rotate(${gm*6+gs*0.06}deg)`;
+            h.style.transform = `rotate(${gh*30+gm*0.5}deg)`;
+        }
+        getTime();
+        setInterval(getTime,1000);
+    </script>
 </body>
 </html>
