@@ -12,8 +12,12 @@
             box-sizing: border-box;
         }
         :root{
+            --h-needle-circle-size: 60px;
+            --h-needle-size: 320px;
+            --m-needle-size: 307px;
+            --s-needle-size: 315px;
             --clock-size:700px;
-            --scale-clock:0.4;
+            --scale-clock:1;
             --scale:0.93;
             --time-center-size: 30px;
             --clr-bg:#a3a3a3;
@@ -48,8 +52,24 @@
             0 15px 15px rgba(0,0,0,0.05),
             inset 0 15px 15px rgba(0,0,0,0.05);
         }
+        @media screen and (max-width:700px) {
+            :root{
+            --h-needle-circle-size: 50px;
+            --h-needle-size: 220px;
+            --m-needle-size: 207px;
+            --s-needle-size: 215px;
+            --clock-size:500px;
+            }
+        }
         @media screen and (max-width:500px) {
-            .clock{width: var(--clock-size);height: var(--clock-size);}
+            :root{
+            --h-needle-circle-size: 35px;
+            --h-needle-size: 145px;
+            --m-needle-size: 147px;
+            --s-needle-size: 145px;
+            --clock-size:350px;
+            }
+            .s-n div span{font-size: 1.2em;}
         }
         .s-n,
         .s-n div,
@@ -124,18 +144,19 @@
             flex-direction: column-reverse;
             background-color: var(--clr-op0);
             border-radius: 10px 10px 50px 50px;
-            width: 60px; height: calc(var(--clock-size) - 375px);}
+            width: 60px; height: var(--h-needle-size);}
         .s-time #h-bar>.s1{
             border-radius: 50%;
             border: var(--clr-needle) 3px solid;
-            width:60px; height:60px;
+            width:var(--h-needle-circle-size); height:var(--h-needle-circle-size);
         }
         .s-time #h-bar>.s2{
             background-color: var(--clr-needle);
-            width: 2px;height:calc(var(--clock-size) - 435px);
+            width: 2px;
+            height:calc(var(--h-needle-size) - var(--h-needle-circle-size));
         }
-        .s-time #m-bar{width: 1px;height: calc(var(--clock-size) - 385px);}
-        .s-time #s-bar{width: 1px;height: calc(var(--clock-size) - 375px);background-color: rgb(245, 0, 0);}
+        .s-time #m-bar{width: 1px;height: var(--m-needle-size);}
+        .s-time #s-bar{width: 1px;height: var(--s-needle-size);background-color: rgb(245, 0, 0);}
         
     </style>
 </head>
