@@ -12,6 +12,8 @@
             box-sizing: border-box;
         }
         :root{
+            --clock-size:700px;
+            --scale-clock:0.4;
             --scale:0.93;
             --time-center-size: 30px;
             --clr-bg:#a3a3a3;
@@ -19,8 +21,8 @@
             --clr-needle:rgb(0, 0, 0);
         }
         html,body{
-            width: 100%; height: 100%;
-            /* overflow: hidden; */
+            width: 100vw; height: 100vh;
+            overflow: hidden;
             font-family: 'Baloo 2', sans-serif;
         }
         body{
@@ -35,9 +37,9 @@
             align-items: center;
         }
         .clock{
-            transform: scale(0.8);
+            transform: scale(var(--scale-clock));
             position: relative;
-            width: 500px;height: 500px;
+            width: var(--clock-size);height:var(--clock-size);
             border-radius: 50%;
             /* background: linear-gradient(145deg,#eeeeee,#c8c8c8); */
             border: var(--clr-bg) solid 10px;
@@ -45,6 +47,9 @@
             inset 0 -15px 15px rgba(255,255,255,0.05),
             0 15px 15px rgba(0,0,0,0.05),
             inset 0 15px 15px rgba(0,0,0,0.05);
+        }
+        @media screen and (max-width:500px) {
+            .clock{width: var(--clock-size);height: var(--clock-size);}
         }
         .s-n,
         .s-n div,
@@ -105,19 +110,21 @@
         .s-time>div>div{
             background-color: var(--clr-needle);
             position: absolute;
+            top: 0;left: 0;
             transform: translateX(-50%);
         }
         .s-time .h{transform: rotate();}
         .s-time .m{transform: rotate();}
         .s-time .s{transform: rotate();}
         .s-time #h-bar{
+            
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-direction: column-reverse;
             background-color: var(--clr-op0);
             border-radius: 10px 10px 50px 50px;
-            width: 60px; height: 225px;}
+            width: 60px; height: calc(var(--clock-size) - 375px);}
         .s-time #h-bar>.s1{
             border-radius: 50%;
             border: var(--clr-needle) 3px solid;
@@ -125,10 +132,10 @@
         }
         .s-time #h-bar>.s2{
             background-color: var(--clr-needle);
-            width: 2px;height:175px;
+            width: 2px;height:calc(var(--clock-size) - 435px);
         }
-        .s-time #m-bar{width: 1px;height: 230px;}
-        .s-time #s-bar{width: 1px;height: 240px;background-color: rgb(245, 0, 0);}
+        .s-time #m-bar{width: 1px;height: calc(var(--clock-size) - 385px);}
+        .s-time #s-bar{width: 1px;height: calc(var(--clock-size) - 375px);background-color: rgb(245, 0, 0);}
         
     </style>
 </head>
@@ -163,18 +170,17 @@
             </div>`;
         }
 
-
         const h = document.getElementById('h');
         const m = document.getElementById('m');
         const s = document.getElementById('s');
         function getTime(){
             const date = new Date();
-            const gh = String(date.getHours());
-            const gm = String(date.getMinutes());
+            const gh = date.getHours();
+            const gm = date.getMinutes();
             const gs = date.getSeconds();
-            s.style.transform = `rotate(${gs*6}deg)`;
-            m.style.transform = `rotate(${gm*6+gs*0.06}deg)`;
-            h.style.transform = `rotate(${gh*30+gm*0.5}deg)`;
+            s.style.transform = `rotateZ(${gs*6}deg)`;
+            m.style.transform = `rotateZ(${gm*6+gs*0.06}deg)`;
+            h.style.transform = `rotateZ(${gh*30+gm*0.5}deg)`;
         }
         getTime();
         setInterval(getTime,1000);
